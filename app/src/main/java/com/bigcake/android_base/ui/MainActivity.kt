@@ -1,7 +1,8 @@
-package com.bigcake.android_base
+package com.bigcake.android_base.ui
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.bigcake.android_base.R
 
 class MainActivity : AppCompatActivity() {
 
