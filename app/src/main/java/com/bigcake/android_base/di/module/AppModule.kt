@@ -3,6 +3,11 @@ package com.bigcake.android_base.di.module
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
+import com.bigcake.android_base.data.local.prefs.SharedPreferencesSource
+import com.bigcake.android_base.data.local.prefs.SharedPreferencesSourceImpl
+import com.bigcake.android_base.data.remote.Api
+import com.bigcake.android_base.data.remote.RemoteDataSource
+import com.bigcake.android_base.data.remote.RemoteDataSourceImpl
 import com.bigcake.android_base.di.qualifier.ApplicationContext
 import com.bigcake.android_base.di.qualifier.BodyLoggingInterceptor
 import com.bigcake.android_base.di.qualifier.HeaderLoggingInterceptor
@@ -60,6 +65,21 @@ class AppModule(private val application: Application) {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build()
+    }
+
+    @Provides
+    fun provideAPI(retrofit: Retrofit): Api {
+        return retrofit.create(Api::class.java)
+    }
+
+    @Provides
+    fun provideRemoteDataSource(source: RemoteDataSourceImpl): RemoteDataSource {
+        return source
+    }
+
+    @Provides
+    fun providePrefsSource(source: SharedPreferencesSourceImpl): SharedPreferencesSource {
+        return source
     }
 
     @Provides
